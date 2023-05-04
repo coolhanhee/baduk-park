@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>바둑공원 with 성서키즈바둑</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+  <script>
+    // 마우스를 갖다대면 메뉴를 보이게 함
+		document.addEventListener("DOMContentLoaded", function() {
+			var menuItems = document.querySelectorAll(".menu_wrap > ul > li");
+			for (var i = 0; i < menuItems.length; i++) {
+				menuItems[i].addEventListener("mouseover", function() {
+					this.querySelector("ul").style.display = "block";
+				});
+				menuItems[i].addEventListener("mouseout", function() {
+					this.querySelector("ul").style.display = "none";
+				});
+			}
+		});
+  </script>
+</head>
+<body>
+  <h1>바둑공원</h1>
+  <div class="menu_wrap">
+    <ul>
+      <li>
+        <a href="#">홈</a>
+        <ul>
+          <li><a href="https://AvariciousProperAdmins.coolhanhee.repl.co">about</a></li>
+          <li><a href="#">만들게 된 이유</a></li>
+          <li><a href="#">QNA</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">바둑</a>
+        <ul>
+          <li><a href="#">바둑판(개발중)</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">대회</a>
+        <ul>
+          <li><a href="#">대회 예정</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://intentstimulatingvolcano.coolhanhee.repl.co">커뮤니티</a>
+        <ul>
+          <li><a href="">인기 채널</a></li>
+
+          <li><a href="">바둑에 대한 잡담</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">회원가입</a>
+      </li>
+      <li>
+        <a href="https://nae-wiki-saiteu.coolhanhee.repl.co">로그인</a>
+      </li>
+    </ul>
+  </div>
+	<main>
+		<section>
+			<h2>새로운 대회 공지</h2>
+			<p>2023년 4월 15일부터 18일까지 전국대학생 바둑대회가 개최됩니다.</p>
+			<a href="#">더 보기</a>
+		</section>
+		<section>
+			<h2>최근 게시물</h2>
+			<ul>
+				<li><a href="#">한국서바이벌바둑대회 우승자 발표</a></li>
+				<li><a href="#">제3회 바둑그랑프리 대회 결과</a></li>
+				<li><a href="#">현대바둑신문에서 김창현 9단 인터뷰</a></li>
+			</ul>
+		</section>
+		<section>
+			<h2>인기 기사</h2>
+			<ul>
+				<li>
+					<a href="#" class="article-link">
+						<img src="article1.jpg" alt="인공지능 바둑 AI의 발전과 한계">
+						<h3>인공지능 바둑 AI의 발전과 한계</h3>
+						<p>최근 인공지능 바둑 AI가 대회에서 인간 선수를 이기는 기적적인 모습을 보였지만, 그 한계와 문제점도 여전히 존재합니다.</p>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="article-link">
+						<img src="article2.jpg" alt="일본 바둑의 역사와 문화">
+						<h3>일본 바둑의 역사와 문화</h3>
+						<p>일본 바둑은 오랜 역사와 문화를 지니고 있으며, 한국과는 다른 독자적인 발전을 거쳐 왔습니다.</p>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="article-link">
+						<img src="article3.jpg" alt="세계 바둑계의 대표적인 선수들">
+						<h3>세계 바둑계의 대표적인 선수들</h3>
+						<p>세계 각국에서 활동하는 바둑 선수들 중에서 대표적인 인물들을 소개합니다.</p>
+					</a>
+				</li>
+			</ul>
+		</section>
+	<script>
+		// 뉴스 목록을 가져오는 함수
+		function getNews() {
+			// Ajax를 사용하여 서버에서 뉴스 목록을 가져옵니다.
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'news.json', true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+					// 뉴스 목록을 가져와서 리스트에 추가합니다.
+					var news = JSON.parse(xhr.responseText);
+					var newsList = document.getElementById('news');
+					newsList.innerHTML = '';
+					for (var i = 0; i < news.length; i++) {
+						var li = document.createElement('li');
+						li.textContent = news[i].title;
+						newsList.appendChild(li);
+					}
+				}
+			};
+			xhr.send();
+		}
+
+		// 페이지가 로드되면 뉴스를 자동으로 갱신합니다.
+		window.onload = function() {
+			getNews();
+			setInterval(getNews, 60000); // 1분마다 뉴스를 갱신합니다.
+		};
+	</script>
+	</main>
+	<footer>
+		<p>바둑공원 &copy; 2023.alrights.reversed</p>
+	</footer>
+</body>
+</html>
